@@ -1,0 +1,7 @@
+{
+  "name": "poc-vue-emp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
