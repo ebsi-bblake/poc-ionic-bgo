@@ -17,10 +17,10 @@
       </ion-header>
 
       <div id="container">
-        <strong class="capitalize">{{ $route.params.id }}</strong>
-
-        <IconComponent></IconComponent>
-
+        <ion-button @click="openModal">Open Modal</ion-button>
+        <p>{{ message }}</p>
+        <!-- <IconComponent></IconComponent> -->
+        <ion-button @click="openBrowser">Open Web Page</ion-button>
         <p>
           Explore
           <a
@@ -36,6 +36,7 @@
 </template>
 
 <script setup lang="ts">
+import { InAppBrowser, DefaultWebViewOptions } from "@capacitor/inappbrowser";
 import {
   IonButtons,
   IonContent,
@@ -46,6 +47,37 @@ import {
   IonToolbar,
 } from "@ionic/vue";
 import IconComponent from "./IconComponent.vue";
+import CameraComponent from "./CameraComponent.vue";
+import { ref } from "vue";
+import ModalComponent from "./ModalComponent.vue";
+import { modalController } from "@ionic/vue";
+
+const openBrowser = async () => {
+  console.log("running in app");
+  await InAppBrowser.openInWebView({
+    url: "https://www.google.com",
+    options: DefaultWebViewOptions,
+  });
+};
+
+const message = ref("Click the button to open the modal.");
+
+const openModal = async () => {
+  const modal = await modalController.create({
+    component: ModalComponent,
+    cssClass: "my-custom-class",
+  });
+  console.log(modal);
+  modal.present();
+
+  const { data, role } = await modal.onWillDismiss();
+  console.log(data, role);
+  if (role === "confirm" && data) {
+    message.value = `Hello, ${data}!`;
+  } else {
+    message.value = "Modal dismissed";
+  }
+};
 </script>
 
 <style scoped>
