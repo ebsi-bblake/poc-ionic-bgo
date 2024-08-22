@@ -57,13 +57,13 @@ Before you begin, ensure you have the following installed:
 1. **Start the Development Server**:
 
    ```bash
-   npm run start
+   npm run dev
    ```
 
    or
 
    ```bash
-   yarn start
+   yarn dev
    ```
 
 2. **Open in Browser**:
