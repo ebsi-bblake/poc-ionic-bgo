@@ -2,6 +2,7 @@
   <ion-card>
     <ion-card-header>
       <ion-card-title>Select a Client Icon</ion-card-title>
+      <ion-label>{{ selectedClient }}</ion-label>
     </ion-card-header>
     <ion-card-content>
       <ion-radio-group v-model="selectedClient">
@@ -42,6 +43,8 @@ function useIconSwitcher() {
   const selectedClient = ref("default");
 
   const setIcon = async (iconName) => {
+    console.log("SET ICON", iconName);
+    console.log("APP", App);
     try {
       await App.setAlternateIconName(iconName === "default" ? null : iconName);
       console.log(`Icon changed to: ${iconName}`);

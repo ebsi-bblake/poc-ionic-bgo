@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "sourceMap": true,
     "noImplicitAny": false, // or simply omit this setting to allow implicit 'any'
     "target": "ESNext",
     "useDefineForClassFields": true,
